@@ -31,11 +31,11 @@ public class SeaMonster extends WaterAnimal {
 
     public SeaMonster(EntityType<? extends WaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.1F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
         this.body = new SeaMonsterPart(this, "body", 1.5F, 1.1F);
-        this.head = new SeaMonsterPart(this, "head", 0.75F, 0.75F);
-        this.head2 = new SeaMonsterPart(this, "head2", 0.75F, 0.75F);
+        this.head = new SeaMonsterPart(this, "head", 1.0F, 0.75F);
+        this.head2 = new SeaMonsterPart(this, "head2", 1.0F, 0.75F);
         this.tail = new SeaMonsterPart(this, "tail", 1.0F, 0.85F);
         this.tail2 = new SeaMonsterPart(this, "tail2", 1.0F, 0.85F);
         this.subEntities = new SeaMonsterPart[]{this.body, this.head, this.head2, this.tail, this.tail2};
@@ -45,7 +45,7 @@ public class SeaMonster extends WaterAnimal {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
-        this.goalSelector.addGoal(5, new RandomSwimmingGoal(this, 5.0D, 10));
+        this.goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.0D, 10));
     }
 
     @Override
@@ -133,9 +133,9 @@ public class SeaMonster extends WaterAnimal {
 
     protected void updateParts() {
         Vec3 body = Vec3.ZERO;
-        Vec3 head = new Vec3(0.0D, 0.2D, 1.2D).xRot(-getXRot() * ((float) Math.PI / 180f)).yRot(-yBodyRot * ((float) Math.PI / 180f));
+        Vec3 head = new Vec3(0.0D, 0.2D, 1.0D).xRot(-getXRot() * ((float) Math.PI / 180f)).yRot(-yBodyRot * ((float) Math.PI / 180f));
         Vec3 head2 = new Vec3(0.0D, 0.2D, 2.0D).xRot(-getXRot() * ((float) Math.PI / 180f)).yRot(-yBodyRot * ((float) Math.PI / 180f));
-        Vec3 tail = new Vec3(0.0D, 0.2D, -1.2D).xRot(-getXRot() * ((float) Math.PI / 180f)).yRot(-yBodyRot * ((float) Math.PI / 180f));
+        Vec3 tail = new Vec3(0.0D, 0.2D, -1.0D).xRot(-getXRot() * ((float) Math.PI / 180f)).yRot(-yBodyRot * ((float) Math.PI / 180f));
         Vec3 tail2 = new Vec3(0.0D, 0.2D, -2.0D).xRot(-getXRot() * ((float) Math.PI / 180f)).yRot(-yBodyRot * ((float) Math.PI / 180f));
 
         movePart(this.body, body.x, body.y, body.z);
